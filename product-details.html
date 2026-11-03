@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA | Product Details</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F7EDE7;
+    color: #1A1A1A;
+    font-family: 'DM Sans', sans-serif;
+}
+
+header {
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e7dcd5;
+}
+
+header a {
+    color: #1A1A1A;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    letter-spacing: 4px;
+}
+
+.product-container {
+    max-width: 1100px;
+    margin: 65px auto;
+    padding: 0 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.product-image {
+    background: #eee2dc;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.details {
+    padding: 20px 0;
+}
+
+.category {
+    color: #C97B7B;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 45px);
+    font-weight: 500;
+    margin: 18px 0;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.description {
+    color: #777;
+    line-height: 1.8;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.option {
+    margin-bottom: 22px;
+}
+
+.option label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.option select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d9cbc2;
+    background: transparent;
+    font-family: inherit;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.quantity-control button {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #d9cbc2;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.quantity-control span {
+    min-width: 20px;
+    text-align: center;
+}
+
+.add-button {
+    width: 100%;
+    padding: 17px;
+    margin-top: 30px;
+    background: #1A1A1A;
+    color: white;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-family: inherit;
+    transition: .3s;
+}
+
+.add-button:hover {
+    background: #C97B7B;
+}
+
+.message {
+    margin-top: 15px;
+    color: #58765b;
+    font-size: 13px;
+    min-height: 20px;
+}
+
+footer {
+    background: #1A1A1A;
+    color: #c9bdb5;
+    text-align: center;
+    padding: 30px 15px;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+@media(max-width: 750px) {
+    .product-container {
+        grid-template-columns: 1fr;
+        margin: 35px auto;
+        gap: 25px;
+    }
+
+    .product-image,
+    .product-image img {
+        min-height: 350px;
+        height: 350px;
+    }
+
+    header {
+        padding: 18px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="javascript:history.back()">← BACK</a>
+    <div class="logo">VELORA</div>
+    <a href="index.html">HOME</a>
+</header>
+
+<main class="product-container">
+
+    <div class="product-image">
+        <img id="productImage" src="" alt="Product">
+    </div>
+
+    <section class="details">
+        <span class="category" id="productCategory">VELORA COLLECTION</span>
+
+        <h1 id="productName">Product Name</h1>
+
+        <div class="price" id="productPrice">0 EGP</div>
+
+        <p class="description">
+            Discover a piece designed to complement your personal style.
+            A timeless addition to your collection, made to help you
+            wear your story with confidence.
+        </p>
+
+        <div class="option">
+            <label for="size">SELECT SIZE</label>
+            <select id="size">
+                <option value="">Choose a size</option>
+                <option>XS</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+            </select>
+        </div>
+
+        <div class="option">
+            <label for="color">SELECT COLOR</label>
+            <select id="color">
+                <option value="">Choose a color</option>
+                <option>Black</option>
+                <option>White</option>
+                <option>Beige</option>
+                <option>Brown</option>
+                <option>Pink</option>
+                <option>Blue</option>
+            </select>
+        </div>
+
+        <div class="option">
+            <label>QUANTITY</label>
+            <div class="quantity-control">
+                <button type="button" onclick="changeQuantity(-1)">−</button>
+                <span id="quantity">1</span>
+                <button type="button" onclick="changeQuantity(1)">+</button>
+            </div>
+        </div>
+
+        <button class="add-button" onclick="addToBag()">
+            ADD TO BAG
+        </button>
+
+        <p class="message" id="message"></p>
+    </section>
+
+</main>
+
+<footer>VELORA — WEAR YOUR STORY.</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const name = params.get("name") || "Product";
+const price = Number(params.get("price")) || 0;
+const image = params.get("image") || "";
+const category = params.get("category") || "Collection";
+const type = params.get("type") || "Fashion";
+
+document.getElementById("productName").textContent = name;
+document.getElementById("productPrice").textContent =
+    price.toLocaleString("en-US") + " EGP";
+
+document.getElementById("productCategory").textContent =
+    category + " / " + type;
+
+document.getElementById("productImage").src = image;
+document.getElementById("productImage").alt = name;
+
+document.title = "VELORA | " + name;
+
+let quantity = 1;
+
+function changeQuantity(amount) {
+    quantity += amount;
+
+    if (quantity < 1) {
+        quantity = 1;
+    }
+
+    if (quantity > 20) {
+        quantity = 20;
+    }
+
+    document.getElementById("quantity").textContent = quantity;
+}
+
+function addToBag() {
+    const size = document.getElementById("size").value;
+    const color = document.getElementById("color").value;
+
+    if (!size || !color) {
+        document.getElementById("message").style.color = "#C97B7B";
+        document.getElementById("message").textContent =
+            "Please select a size and color first.";
+        return;
+    }
+
+    const product = {
+        name: name,
+        price: price,
+        image: image,
+        category: category,
+        type: type,
+        size: size,
+        color: color,
+        quantity: quantity
+    };
+
+    let bag = JSON.parse(localStorage.getItem("veloraBag")) || [];
+
+    bag.push(product);
+
+    localStorage.setItem("veloraBag", JSON.stringify(bag));
+
+    document.getElementById("message").style.color = "#58765b";
+    document.getElementById("message").textContent =
+        "Product added to your bag successfully!";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA | Boys</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+background:#F7EDE7;
+color:#1A1A1A;
+font-family:'DM Sans',sans-serif;
+}
+
+header{
+height:82px;
+padding:0 7%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#F7EDE7;
+border-bottom:1px solid #e7dcd5;
+}
+
+.logo{
+font-family:'Playfair Display',serif;
+font-size:30px;
+letter-spacing:4px;
+font-weight:700;
+}
+
+nav{
+display:flex;
+gap:30px;
+}
+
+nav a,.back-link{
+color:#1A1A1A;
+text-decoration:none;
+font-size:13px;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
+nav a:hover,.back-link:hover{
+color:#C97B7B;
+}
+
+.hero{
+min-height:390px;
+background:
+linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.08)),
+url('https://www.ao76.com/cdn/shop/collections/AW24_Day3_Look03_0086_1600x.jpg?v=1721635943')
+center 38%/cover;
+display:flex;
+align-items:center;
+padding:60px 10%;
+color:white;
+}
+
+.hero-content{
+max-width:500px;
+}
+
+.eyebrow{
+font-size:11px;
+letter-spacing:4px;
+margin-bottom:18px;
+text-transform:uppercase;
+}
+
+.hero h1{
+font-family:'Playfair Display',serif;
+font-size:clamp(48px,7vw,78px);
+font-weight:500;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:14px;
+letter-spacing:1px;
+line-height:1.8;
+}
+
+.collection{
+padding:75px 8%;
+}
+
+.section-heading{
+text-align:center;
+margin-bottom:45px;
+}
+
+.section-heading span{
+color:#C97B7B;
+font-size:11px;
+letter-spacing:4px;
+text-transform:uppercase;
+}
+
+.section-heading h2{
+font-family:'Playfair Display',serif;
+font-size:38px;
+font-weight:500;
+margin:12px 0;
+}
+
+.section-heading p{
+color:#777;
+font-size:13px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.card{
+text-decoration:none;
+color:#1A1A1A;
+display:block;
+}
+
+.image-wrap{
+height:390px;
+overflow:hidden;
+background:#e8ded8;
+}
+
+.card img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:transform .5s ease;
+}
+
+.card:hover img{
+transform:scale(1.05);
+}
+
+.card-info{
+padding:20px 4px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid #d9cbc2;
+}
+
+.card-info h3{
+font-family:'Playfair Display',serif;
+font-size:23px;
+font-weight:500;
+}
+
+.arrow{
+font-size:22px;
+}
+
+.about{
+background:#1A1A1A;
+color:#F7EDE7;
+text-align:center;
+padding:65px 20px;
+}
+
+.about h2{
+font-family:'Playfair Display',serif;
+font-size:34px;
+font-weight:500;
+margin-bottom:15px;
+}
+
+.about p{
+color:#c9bdb5;
+font-size:13px;
+line-height:1.8;
+}
+
+footer{
+padding:25px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:11px;
+letter-spacing:1px;
+color:#777;
+}
+
+@media(max-width:800px){
+header{padding:0 5%}
+nav{gap:12px}
+nav a{font-size:10px}
+.cards{grid-template-columns:1fr 1fr}
+.image-wrap{height:300px}
+}
+
+@media(max-width:520px){
+header{
+height:auto;
+padding:20px;
+flex-direction:column;
+gap:15px;
+}
+
+nav{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.hero{min-height:330px}
+.cards{grid-template-columns:1fr}
+.image-wrap{height:380px}
+.collection{padding:55px 7%}
+
+footer{
+flex-direction:column;
+gap:12px;
+text-align:center;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html" class="back-link">← Home</a>
+
+<div class="logo">VELORA</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="men.html">Men</a>
+<a href="women.html">Women</a>
+<a href="girls.html">Girls</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+<div class="eyebrow">VELORA KIDS COLLECTION</div>
+<h1>Little Gentlemen.</h1>
+<p>Comfort, confidence and timeless style for every little adventure.</p>
+</div>
+</section>
+
+<section class="collection">
+
+<div class="section-heading">
+<span>THE BOYS COLLECTION</span>
+<h2>Explore Boys' Style</h2>
+<p>Everyday essentials, made for little adventures.</p>
+</div>
+
+<div class="cards">
+
+<!-- CLOTHING -->
+<a href="products.html?category=boys&type=clothing" class="card">
+<div class="image-wrap">
+<img
+src="./images/boys-clothes-1.jpg"
+alt="Boys fashion clothing collection">
+</div>
+
+<div class="card-info">
+<h3>Clothing</h3>
+<span class="arrow">↗</span>
+</div>
+</a>
+
+<!-- SHOES -->
+<a href="products.html?category=boys&type=shoes" class="card">
+<div class="image-wrap">
+<img
+src="https://cdn.auchan.fr/media/3d4eaeba-b278-46d7-a4d8-75b21a718a1b_1200x1200/B2CD/"
+alt="Boys sneakers">
+</div>
+
+<div class="card-info">
+<h3>Shoes</h3>
+<span class="arrow">↗</span>
+</div>
+</a>
+
+<!-- BAGS -->
+<a href="products.html?category=boys&type=bags" class="card">
+<div class="image-wrap">
+<img
+src="https://www.happykid.co.nz/cdn/shop/files/School_bag_for_boys_Britisch_style_1_3_800x.jpg?v=1682664271"
+alt="Boys school backpack">
+</div>
+
+<div class="card-info">
+<h3>Bags</h3>
+<span class="arrow">↗</span>
+</div>
+</a>
+
+</div>
+</section>
+
+<section class="about" id="about">
+<h2>Made for Every Adventure.</h2>
+<p>VELORA celebrates every generation with comfort, quality and effortless style.</p>
+</section>
+
+<footer>
+<span>© 2026 VELORA</span>
+<span>WEAR YOUR STORY.</span>
+</footer>
+
+</body>
+</html>

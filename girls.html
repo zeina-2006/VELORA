@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girls' Collection | VELORA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #F7EDE7;
+            color: #1A1A1A;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .announcement {
+            background: #1A1A1A;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        header {
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            letter-spacing: 5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #C97B7B;
+        }
+
+        .page-hero {
+            min-height: 420px;
+            background:
+                linear-gradient(90deg, rgba(0,0,0,.45), rgba(0,0,0,.03)),
+                url('https://cdn.shopify.com/s/files/1/0004/0245/6582/files/12_80fc3c0d-a972-4fa6-84df-461f925dd8e5.jpg?v=1772020376')
+                center 40% / cover;
+            display: flex;
+            align-items: center;
+            padding: 60px 9%;
+            color: white;
+        }
+
+        .page-hero span {
+            font-size: 10px;
+            letter-spacing: 4px;
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(45px, 7vw, 75px);
+            font-weight: 400;
+            margin: 15px 0;
+        }
+
+        .page-hero p {
+            font-size: 13px;
+            color: #eee;
+        }
+
+        .intro {
+            text-align: center;
+            padding: 65px 20px 35px;
+        }
+
+        .intro span {
+            color: #C97B7B;
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 400;
+            margin-top: 12px;
+        }
+
+        .categories {
+            padding: 10px 7% 70px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .category {
+            position: relative;
+            height: 420px;
+            overflow: hidden;
+            background: #D4B89B;
+            cursor: pointer;
+        }
+
+        .category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .6s;
+        }
+
+        .category:hover img {
+            transform: scale(1.06);
+        }
+
+        .category::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 45%, rgba(0,0,0,.65));
+        }
+
+        .category-info {
+            position: absolute;
+            bottom: 25px;
+            left: 22px;
+            color: white;
+            z-index: 2;
+        }
+
+        .category-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .category-info span {
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .back-home {
+            text-align: center;
+            padding: 0 20px 70px;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 14px 30px;
+            background: #1A1A1A;
+            color: white;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        footer {
+            background: #1A1A1A;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer .logo {
+            margin-bottom: 12px;
+        }
+
+        footer p {
+            color: #bbb;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .category {
+                height: 300px;
+            }
+
+            .category-info h3 {
+                font-size: 23px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .category {
+                height: 380px;
+            }
+
+            .intro h2 {
+                font-size: 29px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="announcement">
+        VELORA GIRLS — LITTLE STYLES, BIG PERSONALITIES
+    </div>
+
+    <header>
+        <a href="index.html" class="logo">VELORA</a>
+
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="#categories">COLLECTIONS</a>
+            <a href="#about">ABOUT</a>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div>
+            <span>THE VELORA KIDS COLLECTION</span>
+            <h1>Girls' Style.</h1>
+            <p>Comfort, confidence and a little everyday magic.</p>
+        </div>
+    </section>
+
+    <section class="intro">
+        <span>MADE FOR LITTLE MOMENTS</span>
+        <h2>Girls' Collection</h2>
+    </section>
+
+    <section class="categories" id="categories">
+
+        <!-- Girls Clothing -->
+        <a href="products.html?category=girls&type=clothing" class="category">
+            <img
+                src="https://cdn.shopify.com/s/files/1/0004/0245/6582/files/12_80fc3c0d-a972-4fa6-84df-461f925dd8e5.jpg?v=1772020376"
+                alt="Girls Clothing">
+            <div class="category-info">
+                <h3>Clothing</h3>
+                <span>EXPLORE NOW</span>
+            </div>
+        </a>
+
+        <!-- Girls Shoes -->
+        <a href="products.html?category=girls&type=shoes" class="category">
+            <img
+                src="https://cdn.fcglcdn.com/brainbees/images/products/zoom/pine-kids-slip-on-ballerina-with-bow-applique-pink-22307181zzsq.webp"
+                alt="Girls Shoes">
+            <div class="category-info">
+                <h3>Shoes</h3>
+                <span>EXPLORE NOW</span>
+            </div>
+        </a>
+
+        <!-- Girls Bags -->
+        <a href="products.html?category=girls&type=bags" class="category">
+            <img
+                src="https://www.juniorcouture.co.uk/dw/image/v2/BGHV_PRD/on/demandware.static/-/Sites-master-catalog/default/dwe39d4e4d/images/AF-SKYLA/SKYLA_PEARL_PINK_a.jpg?sh=1500&sw=1500"
+                alt="Girls Bags">
+            <div class="category-info">
+                <h3>Bags</h3>
+                <span>EXPLORE NOW</span>
+            </div>
+        </a>
+
+    </section>
+
+    <section class="back-home" id="about">
+        <a href="index.html">BACK TO HOME</a>
+    </section>
+
+    <footer>
+        <div class="logo">VELORA</div>
+        <p>WEAR YOUR STORY.</p>
+        <p style="margin-top:18px;">© 2026 VELORA. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+</body>
+</html>

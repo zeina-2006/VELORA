@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA | Products</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F7EDE7;color:#1A1A1A;font-family:'DM Sans',sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e7dcd5}
+.logo{font-family:'Playfair Display',serif;font-size:30px;letter-spacing:4px}
+header a{color:#1A1A1A;text-decoration:none;font-size:12px;letter-spacing:1px}
+.intro{text-align:center;padding:65px 20px 35px}
+.intro span{color:#C97B7B;font-size:11px;letter-spacing:4px;text-transform:uppercase}
+.intro h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,55px);font-weight:500;margin:12px 0}
+.intro p{color:#777;font-size:13px}
+.toolbar{max-width:1200px;margin:25px auto 35px;padding:0 25px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.toolbar select{padding:12px 15px;border:1px solid #d9cbc2;background:transparent;font-family:inherit;cursor:pointer}
+.products{max-width:1200px;margin:auto;padding:0 25px 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.product-card{background:#fffaf7;overflow:hidden;cursor:pointer}
+.product-image{height:350px;background:#eee2dc;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.product-card:hover img{transform:scale(1.04)}
+.product-info{padding:18px}
+.product-info h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;margin-bottom:8px}
+.product-info p{color:#777;font-size:12px;margin-bottom:12px}
+.price{font-weight:700;font-size:14px}
+.empty{grid-column:1/-1;text-align:center;padding:50px 10px;color:#777}
+.image-error{color:#9b7770;font-size:13px;text-align:center;padding:15px}
+footer{background:#1A1A1A;color:#c9bdb5;text-align:center;padding:30px 15px;font-size:11px;letter-spacing:2px}
+
+@media(max-width:800px){
+.products{grid-template-columns:repeat(2,1fr)}
+.product-image{height:300px}
+}
+@media(max-width:520px){
+header{padding:18px}
+.logo{font-size:24px}
+.products{grid-template-columns:1fr}
+.product-image{height:380px}
+.toolbar{flex-wrap:wrap}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html">← HOME</a>
+<div class="logo">VELORA</div>
+<a href="index.html">COLLECTIONS</a>
+</header>
+
+<section class="intro">
+<span id="categoryLabel">VELORA COLLECTION</span>
+<h1 id="pageTitle">Our Collection</h1>
+<p>Discover pieces that tell your story.</p>
+</section>
+
+<section class="toolbar">
+<span id="resultCount">Our Products</span>
+<select id="sortSelect">
+<option value="default">Sort: Featured</option>
+<option value="low">Price: Low to High</option>
+<option value="high">Price: High to Low</option>
+</select>
+</section>
+
+<main class="products" id="productsGrid"></main>
+
+<footer>VELORA — WEAR YOUR STORY.</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const category = (params.get("category") || "women").toLowerCase();
+const type = (params.get("type") || "clothing").toLowerCase();
+
+const categoryNames = {
+    men: "Men",
+    women: "Women",
+    girls: "Girls",
+    boys: "Boys"
+};
+
+const typeNames = {
+    clothing: "Clothing",
+    shoes: "Shoes",
+    bags: "Bags",
+    heels: "Heels",
+    sunglasses: "Sunglasses",
+    watches: "Watches",
+    makeup: "Makeup"
+};
+
+/* MEN CLOTHING */
+const menClothes = [
+["Striped Quarter-Zip Sweatshirt",850],
+["Brown Suede Jacket Outfit",2300],
+["Light Blue Cable-Knit Sweater",1150],
+["Dark Brown Quarter-Zip Pullover",900],
+["Brown Bomber Jacket",1000],
+["Navy Blue Button-Down Shirt",2800],
+["Navy Blue Zip-Up Hoodie",900],
+["Royal Blue Zip-Up Hoodie",1100],
+["Black Casual Shirt",2000],
+["Blue Denim Jeans",850],
+["Black Denim Jacket",1000],
+["Olive Green Zip-Up Hoodie",700],
+["Navy Blue Basic T-Shirt",800],
+["Navy Blue Hoodie Outfit",1000],
+["Light Blue Polo Shirt",1300],
+["Blue V-Neck Sweater",950],
+["White Nike Tracksuit",650],
+["Plaid Hooded Jacket",950],
+["Beige Casual Hoodie",1050],
+["White and Brown Striped",1500],
+["Blue Wide-Leg Jeans",900],
+["White Nike Half-Zip Sweatshirt",900],
+["White Nike Tracksuit Set",2800],
+["Plaid Hooded Overshirt",1750]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/men-clothes-"+(index+1)+".jpg"}));
+
+/* MEN SHOES */
+const menShoes = [
+["Adidas Campus Black & Pink Sneakers",650],
+["Black Air Cushion Running Sneakers",500],
+["Black Chunky Sole Derby Shoes",1050],
+["White Platform Casual Sneakers",750],
+["Black Chunky Sole Oxford Shoes",900],
+["Black Casual Lace-Up Sneakers",840],
+["White Classic Low-Top Sneakers",500],
+["Nike Air Force 1",700],
+["Low White & Brown (Gum Sole)",680],
+["High Top Fashion Sneakers White & Grey",500],
+["Nike Air Force 1 Low Black",580],
+["Chelsea Boots",1400],
+["Hiking Boots / Tactical Boots",700],
+["Black Casual Sneakers",800],
+["Brown Canvas Sneakers",700],
+["Brown Canvas Sneakers",750],
+["Black Chunky Lace-Up Boots",1740],
+["Platform Derby / Chunky Sole Dress Shoe",650],
+["Slip-On / Sneaker Slip-On",550],
+["Nike Dunk Low",700],
+["Balmain",980]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/men-shoes-"+(index+1)+".jpg"}));
+
+/* MEN BAGS */
+const menBags = [
+["Laptop & Travel Backpack",1250],
+["Smart Business Laptop Backpack",1450],
+["Multi-Piece Men's Bag Set",1850],
+["Multi-Compartment Business Backpack",1350],
+["School & Casual Laptop Backpack",950],
+["Small Crossbody Bag",550],
+["Sports Sling Bag",650],
+["Men's Leather Messenger & Shoulder Bag",1750],
+["Classic Leather Crossbody Bag",1450],
+["Casual Shoulder Messenger Bag",850],
+["Casual Vintage Backpack",1100],
+["Dual-Compartment Business Laptop Backpack",1550],
+["Multi-Compartment School & Sports Backpack",1050],
+["Minimalist Sling Bag",600],
+["Men's Clutch Bag",750],
+["Leather Briefcase",2200],
+["Kaitedaishu Crossbody Bag",900],
+["Jimmy Choo Nylon Backpack",3500]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/men-bags-"+(index+1)+".jpg"}));
+
+/* WOMEN CLOTHING */
+const womenClothes = [
+["Blouse and Jumpsuit Outfit",1250],
+["French Vintage Suit and Beret Outfit",2200],
+["Plaid Winter Scarf",450],
+["Deer Embroidered Turtleneck Sweater",950],
+["Crop Cardigan and Pleated Skirt Outfit",1650],
+["Sherpa-Lined Hooded Jacket",1750],
+["Elegant Poncho Blouse and Wide-Leg Pants Set",1850],
+["Vest and White Shirt Layered Outfit",1400],
+["Open-Front Wool Blend Coat",2300],
+["Long Trench Coat and Denim Outfit",2450],
+["Sherpa Fleece Hooded Cardigan",1350],
+["Fringed Poncho Shawl",850],
+["Turtleneck Knit Sweater Dress",1450],
+["Belted Trench Coat",2500],
+["Puff Sleeve Blouse and Wide-Leg Pants Set",1750],
+["Wrap Blouse and Wide-Leg Pants Outfit",1650],
+["Hooded Trench Coat",2350],
+["Faux Fur Coat",2800],
+["Turtleneck Sweater and Wide-Leg Pants Set",1700],
+["Long Flare Sleeve Maxi Dress",1550],
+["Grey Casual Outfit",1250],
+["Maroon Corduroy Dress Outfit",1650],
+["Beige Blazer and Wide-Leg Pants Set",2100],
+["Brown Activewear and Sweatshirt Set",1350],
+["Black Zip-Collar Top and Wide-Leg Jeans",1400],
+["Beige Tracksuit with Black Stripes",1450],
+["Cream Floral Embroidered Cardigan",1150],
+["Brown Open-Front Jacket",1600],
+["White Turtleneck, Jeans, and Belted Jacket Outfit",2000],
+["Olive Green Button-Down Shirt and Pants Set",1750],
+["False-Layered Plaid Collar Sweatshirt",1050],
+["Beige Trench Coat and Wide-Leg Pants Set",2600]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/women-clothes-"+(index+1)+".jpg"}));
+
+/* WOMEN SHOES */
+const womenShoes = [
+["Converse Chuck Taylor All Star Platform",1250],
+["White Chelsea Boots",1450],
+["Chunky Platform Sneakers",950],
+["White Butterfly Glitter Platform Sneakers",1100],
+["White & Pink Chunky Mesh Running Sneakers",1050],
+["Black Lug Sole Combat Boots",1350],
+["Beige Heeled Ankle Boots with Buckle",1500],
+["White Fur-Lined Winter Snow Boots",1650],
+["White & Pink Casual Sneakers",850],
+["White & Pink Chunky Fashion Sneakers",1000],
+["Beige Platform Loafers with Metal Buckle",1150],
+["Pastel Color-Block Platform Sneakers",1050],
+["Chunky Lug Sole Chelsea Boots",1450],
+["Suede Lace-Up Combat Boots",1550],
+["White Platform Loafers with Chain Detail",1200],
+["Beige Platform Sneakers with Heart Details",1000],
+["Black Ankle Boots with Heart Charms",1400],
+["White and Pink Chunky Sports Sneakers",1050]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/women-shoes-"+(index+1)+".jpg"}));
+
+/* WOMEN HEELS */
+const heelsPrices = [5000,6000,7000,8000,9000,10000,11000,12000,13000,14000,15000,16000,17000,18000,19000,20000,21000,22000,23000,25000];
+
+const womenHeels = Array.from({length:20},(_,index)=>({
+    name:"Heels",
+    price:heelsPrices[index],
+    image:"./images/women-heels-"+(index+1)+".jpg"
+}));
+
+/* WOMEN SUNGLASSES */
+const sunglassesPrices = [1200,2750,3500,1850,4200,1500,3200,2450,3900,1350,4600,2100,2850,1750,3700,1150,4400,2300,4950];
+
+const womenSunglasses = Array.from({length:19},(_,index)=>({
+    name:"Sunglasses",
+    price:sunglassesPrices[index],
+    image:"./images/women-sunglasses-"+(index+1)+".jpg"
+}));
+
+/* WOMEN WATCHES */
+const watchesPrices = [45000,32000,68000,39500,55000,37000,62000,48500,70000,33500,58000,42000,65000,36000,51500,67500,30000,46000,59000,38500,63000,49500,34500,56000,67000,41000,69500,53000,31500,60500];
+
+const womenWatches = Array.from({length:30},(_,index)=>({
+    name:"Watches",
+    price:watchesPrices[index],
+    image:"./images/women-watches-"+(index+1)+".jpg"
+}));
+
+/* WOMEN MAKEUP */
+const makeupPrices = [15000,22000,35000,48000,27500,65000,85000,19000,42000,55000,72000,30000,95000,125000,18000,110000,45000,135000,58000,78000,25000,145000,90000,38000,150000,62000,105000,33000,118000,68000];
+
+const womenMakeup = Array.from({length:30},(_,index)=>({
+    name:"Makeup",
+    price:makeupPrices[index],
+    image:"./images/women-makeup-"+(index+1)+".jpg"
+}));
+
+/* WOMEN BAGS */
+const womenBags = [
+["White Top-Handle Bag with Scarf Accessory",2450],
+["Beige Ruched Shoulder Bag with Pearl Handle",2850],
+["Mossdoom Pink Ombre Shoulder Bag with Bow Charm",2650],
+["Christian Dior Lady Dior White Mini Bag",18500],
+["Beige Leather Mini Backpack",3450],
+["Navy Blue Handbag with Ribbon Scarf",2950],
+["Charles & Keith Beige Mini Backpack",3250],
+["White Quilted Flap Bag with Pearl Handle and Bow Strap",3850],
+["Black and Tan Casual Backpack",2750],
+["Chanel Classic Medium Double Flap Bag in White Caviar",22500],
+["Hermes Kelly Black Bag with Silk Twilly Scarf",28500],
+["Quilted Cream Shoulder Bag with Twisted Chain Handle",3650],
+["David Jones Blue and White Top-Handle Bag",2250],
+["Charles & Keith Faux Leather Mini Backpack",3150],
+["White Top-Handle Bag with Ruched Handle and Chain Strap",3450],
+["Black Top-Handle Bag with Gold Hardware",3850],
+["Charles & Keith Beige Mini Backpack",3250],
+["Chanel Light Blue Quilted Classic Flap Bag",19500],
+["Two-Tone White and Brown Crossbody Bag",2650],
+["White Shoulder Bag with Cherry Charm and Chain Strap",2950],
+["White Butterfly Chain Crossbody Bag",2450],
+["Brown Leather Hobo Shoulder Bag",4250],
+["David Jones Two-Tone Top-Handle Bag",2550],
+["Gucci GG Marmont Black Velvet Shoulder Bag",16500],
+["White Crocodile Pattern Crossbody Bag with Wide Strap",3350],
+["Light Blue Butterfly Pearl Chain Shoulder Bag",2850],
+["Grey Nylon Casual Backpack",2450],
+["Cream Ruched Shoulder Bag with Flower Chain",3150],
+["Beige Canvas School Backpack",2250],
+["Maroon Patent Leather Hobo Bag with Cherry Charm",3650],
+["White Quilted Shoulder Bag with Gold Chain and Bar Clasp",3850],
+["Sparkling Evening Clutch Bag with Chain and Bow Detail",3450],
+["White Crossbody Bag with Wide Strap and MC Monogram",3250],
+["Celine Saddle Bag",14500]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/women-bags-"+(index+1)+".jpg"}));
+
+/* GIRLS CLOTHING */
+const girlsClothes = [
+["White Hello Kitty Embroidered Ruffle Strap Romper",1250],
+["Pink Daisy Print Ruffle Romper with Headband",1350],
+["White Bow Print Sweatshirt and Pink Bow Denim Pants Set",2450],
+["White Cat Fluffy Fleece Sweatshirt and Bunny Accent Jeans Set",2650],
+["Denim Jacket and Pleated Skirt Outfit Set",3450],
+["Red Ruffle Crop Top and Tiered Bow Skirt Set",2750],
+["Black Ribbed Halter Top and Leopard Print Tiered Skirt Set",2250],
+["White Polo Shirt and Pink Bunny Detailed Suspender Skirt Set",2350],
+["White Halter Romper with Black Hearts and Bow Belt",1550],
+["White T-Shirt and Daisy Embroidered Denim Overalls Set",2450],
+["White T-Shirt, Denim Jacket, and Cargo Pants Set",3650],
+["Pink Polo Crop Top and Scallop-Hem Denim Shorts Set",1950],
+["White Ruffle Collar Shirt and Bunny Embroidered Denim Overalls Set",2750],
+["White Cherry Embroidered Camisole and Cherry Print Shorts Set",1450],
+["Yellow Textured Floral Romper with Bow Detail",1250],
+["Pink Hello Kitty Hoodie and Sweatpants Set",2850],
+["Pink Teddy Bear Satin Pajama Set",1950],
+["White T-Shirt and Rainbow Embroidered Corduroy Romper Set",1850],
+["Pink Polka Dot Dress with Ruffle Sleeves and Teddy Bear Motif",1650],
+["White Ruffle Collar Floral Embroidered Blouse and Pink Cargo Shorts Set",2450],
+["White Blouse and Denim Suspender Dress Set with Pink Bows",2650],
+["White Hello Kitty Cami Top and Shorts Pajama Set with Slippers",1850],
+["Beige Floral Embroidered Top and Green Shorts Set with Matching Backpack and Headband",3950],
+["Brown Hoodie and Wide-Leg Pants Set with Multicolored Heart Patches",2950],
+["Pastel Striped V-Neck Short Romper",1250],
+["Red Strawberry Embroidered Tank Top and Denim Shorts Set",1850]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/girls-clothes-"+(index+1)+".jpg"}));
+
+/* GIRLS SHOES */
+const girlsShoes = [
+["White Pearl Bow Girls Dress Shoes",1850],
+["Pink Rhinestone Bow Girls Sandals",1650],
+["Pink Floral Pearl Girls Mary Janes",2250],
+["White Pearl Floral Gladiator Sandals",2450],
+["White Pearl Bow Strap Gladiator Sandals",2350],
+["Pink Glitter Rhinestone Girls Sandals",1750],
+["White Light-Up Bow Girls Sneakers",2650],
+["Beige Pearl Bow Girls Boots",3250],
+["White Pearl Strap Bow Girls Mary Janes",2150],
+["Pink Rhinestone Bow Girls Summer Sandals",1850],
+["Pink and White Casual Girls Sneakers",1950],
+["Mint Green Ruched Girls Slide Sandals",1350],
+["Black Bow Pearl Strap Girls Dress Shoes",2250],
+["Pink Rabbit Ear Bow Girls Boots",2950],
+["Pink Heart Accent Girls Boots",2750],
+["Silver Glitter Rhinestone Pearl Girls Dress Shoes",2850],
+["Pink Pearl Strap Bow Girls Mary Janes",2350]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/girls-shoes-"+(index+1)+".jpg"}));
+
+/* GIRLS BAGS */
+const girlsBags = [
+["Pink Pearl Bow Tweed Mini Bag",1850],
+["Pink Rabbit Design Kids Backpack",2250],
+["Pink Fluffy Heart Clasp Crossbody Bag",1650],
+["Pink Fluffy Top-Handle Bag with Bow",1950],
+["Pink Fluffy Heart-Shaped Crossbody Bag with Pearl Chain",2250],
+["Mini Quilted Jelly Handbag with Pearl Handle",2450],
+["Pink Bear Face Plush Crossbody Bag",1750],
+["Pink Stitch Print Kids Chest Bag",1450],
+["Beige Fluffy Crossbody Bag with Gold Bow",1850],
+["White Fluffy Heart-Shaped Handbag with Chain",2150],
+["Beige Tweed Mini Bag with Pearl Handle and Flower Decors",2650],
+["Green and White Tie-Dye Cat Print Kids Backpack",2350],
+["Pink Bunny Face Kids Backpack with Polka Dot Bow",2450],
+["Purple and Pink Rabbit Plush Kids School Backpack",2850],
+["Pink Mini Crossbody Bag with Heart Accent",1550],
+["Purple Bunny Face Kids Backpack with Charms",2650],
+["White Mini Flap Bag with Chain and Ball Charm",2350],
+["Pink Fluffy Ruched Handbag with Flower Charm",1950],
+["Black Quilted Jelly Handbag with Pearl Handle and Charms",2750],
+["White Lace and Tulle Bow Crossbody Bag with Pearl Handle",2950]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/girls-bags-"+(index+1)+".jpg"}));
+
+/* BOYS CLOTHING */
+const boysClothes = [
+["Black and White Polo Shirt and Shorts Set with Lettering",1450],
+["Blue Nike Hooded Zip Jacket, Shorts, and Accessories Set",2850],
+["Baby Boy Corduroy Overalls with Cute Duck Detailing",1650],
+["Grey Hooded Sweatshirt and Sweatpants Set with Cap",2250],
+["White T-Shirt and Denim Overalls Set with Cute Teddy Bear Pocket",1950],
+["Brown and White Striped T-Shirt and Shorts Set with Bear Applique",1550],
+["Grey Polo Sweatshirt and Sweatpants Set with Cap and Socks",2350],
+["White T-Shirt and Tom and Jerry Print Denim Overalls Set",2150],
+["White Polo Shirt, Striped V-Neck Vest, and Brown Shorts Set with Bear Motif",2450],
+["Brown and Black Colorblock Nike Hooded Sweatshirt and Sweatpants Set",2750],
+["White and Navy Blue Colorblock Hoodie and Sweatpants Set",2350],
+["Brown Button-Down Jacket and White Pants Set with Black Shoes",3250],
+["Beige Shirt, Brown Cargo Pants, and Cap Set",2450],
+["Striped T-Shirt and Beige Shorts Overalls Set with Bear Detail",1850],
+["Black Long-Sleeve T-Shirt with Checkered Sleeves and Khaki Pants Set",2250],
+["Nike White Tank Top and Khaki Shorts Overalls Set with Cap",2150],
+["White and Brown Bear Motif Jacket, Sweatpants, and Mini Backpack Set",3450],
+["Beige Short-Sleeve Shirt and Shorts Set with Palm Tree Print",1650],
+["Black and Beige ZARA Logo T-Shirt and Shorts Set",1750],
+["White and Brown Colorblock Sweatshirt and Sweatpants Set with Bear Design",2550]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/boys-clothes-"+(index+1)+".jpg"}));
+
+/* BOYS SHOES */
+const boysShoes = [
+["Black and White Casual Kids Sneakers with Velcro Strap",850],
+["Fila White Chunky Kids Sneakers",1450],
+["Black and White Campus Kids Sneakers with Wide Laces",1150],
+["Beige and White Mesh Kids Sports Sneakers with Cute Bear Accent",1050],
+["Light Blue and White Kids Casual Sneakers with Velcro Strap",900],
+["Grey and White Kids Light-Up Sports Sneakers",1350],
+["Light Blue Kids Casual Sneakers with White Toe Cap and Velcro Strap",950],
+["Beige Mesh Kids Summer Sandals with Velcro Straps",650],
+["Off-White and Burgundy Mesh Kids Chunky Sports Sneakers",1250],
+["Black, Grey, and White Kids Chunky Sports Sneakers with Velcro Strap",1150],
+["Green and Black Kids Casual Sport Sandals with White Soles",750],
+["Beige Kids Casual Sneakers with Cute Bear Face Accent",1050],
+["Brown and Yellow Winter Boots for Kids with Faux Fur Lining",1450],
+["White Kids Casual Sneakers with Black Stripes and Cute Bear Design",1100],
+["White and Blue Kids Chunky Sports Sneakers with Velcro Strap",1200],
+["Black and White Kids Chunky Sports Sneakers with Wavy Design",1250],
+["Blue Polka Dot Denim Soft Sole Baby Shoes with White Laces",550],
+["Black Kids Chunky Sports Sneakers with Laces and Straps",1300],
+["Beige Kids Summer Sandals with 3D Cute Bear Character",800],
+["Grey and White Kids Casual Sneakers with Star Detail and Velcro Strap",1000]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/boys-shoes-"+(index+1)+".jpg"}));
+
+/* BOYS BAGS */
+const boysBags = [
+["Black Quncheng Men's Casual Sling Chest Bag",750],
+["Black Kids Backpack with Soccer Bear Design and Name Tag",1150],
+["Beige Kids Sling Chest Bag with Leopard Bow Bunny Design",650],
+["Navy Blue Kids Cartoon Dog School Backpack",1250],
+["Red and Blue Spider-Man Kids School Backpack",1450],
+["Green Dinosaur Print Kids School Backpack with Ready to Explore Text",1350],
+["Blue Spidey and His Amazing Friends Kids School Backpack",1450],
+["Light Blue Spider-Man Comic Print Kids School Backpack",1350],
+["Blue and Beige Bear Face Star Print Kids School Backpack",1250],
+["Canvas Crossbody Bag with Cute Bear Patch (Beige and Black)",850],
+["Spider-Man Kids Sling Chest Bag",750],
+["Jiange Black and Beige Kids Casual Sling Bag",850],
+["Cute Cartoon Pins Decorated Canvas Fanny Pack / Crossbody Chest Bag (Beige and Pink)",950]
+].map((item,index)=>({name:item[0],price:item[1],image:"./images/boys-bags-"+(index+1)+".jpg"}));
+
+/* PRODUCT DATA */
+const productData = {
+    women: {
+        clothing: womenClothes,
+        shoes: womenShoes,
+        bags: womenBags,
+        heels: womenHeels,
+        sunglasses: womenSunglasses,
+        watches: womenWatches,
+        makeup: womenMakeup
+    },
+    men: {
+        clothing: menClothes,
+        shoes: menShoes,
+        bags: menBags
+    },
+    girls: {
+        clothing: girlsClothes,
+        shoes: girlsShoes,
+        bags: girlsBags
+    },
+    boys: {
+        clothing: boysClothes,
+        shoes: boysShoes,
+        bags: boysBags
+    }
+};
+
+/* PAGE ELEMENTS */
+const title = document.getElementById("pageTitle");
+const label = document.getElementById("categoryLabel");
+const grid = document.getElementById("productsGrid");
+const count = document.getElementById("resultCount");
+const sortSelect = document.getElementById("sortSelect");
+
+/* CHECK COLLECTION */
+if (!categoryNames[category] || !typeNames[type] || !productData[category]?.[type]) {
+    title.textContent = "Collection Not Found";
+    label.textContent = "VELORA";
+    count.textContent = "0 Products";
+    grid.innerHTML = '<p class="empty">Sorry, this collection is not available.</p>';
+} else {
+
+    title.textContent = typeNames[type];
+    label.textContent = categoryNames[category] + " COLLECTION";
+    document.title = "VELORA | " + categoryNames[category] + " " + typeNames[type];
+
+    let products = [...productData[category][type]];
+
+    /* OPEN PRODUCT DETAILS */
+    function openProduct(product) {
+        const detailsURL = new URL("product-details.html", window.location.href);
+
+        detailsURL.searchParams.set("name", product.name);
+        detailsURL.searchParams.set("price", product.price);
+        detailsURL.searchParams.set("image", product.image);
+        detailsURL.searchParams.set("category", categoryNames[category]);
+        detailsURL.searchParams.set("type", typeNames[type]);
+
+        window.location.href = detailsURL.href;
+    }
+
+    /* DISPLAY PRODUCTS */
+    function displayProducts(items) {
+        count.textContent = items.length + " Products";
+
+        grid.innerHTML = items.map((product,index) => `
+            <article class="product-card" data-product-index="${products.indexOf(product)}">
+
+                <div class="product-image">
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                        loading="lazy"
+                        onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'image-error\\'>Image could not be loaded</div>'"
+                    >
+                </div>
+
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p>${categoryNames[category]} / ${typeNames[type]}</p>
+                    <div class="price">${product.price.toLocaleString("en-US")} EGP</div>
+                </div>
+
+            </article>
+        `).join("");
+
+        grid.querySelectorAll(".product-card").forEach(card => {
+            card.addEventListener("click", function() {
+                const productIndex = Number(this.dataset.productIndex);
+                openProduct(products[productIndex]);
+            });
+        });
+    }
+
+    /* SORT PRODUCTS */
+    sortSelect.addEventListener("change", function() {
+        let sorted = [...products];
+
+        if (this.value === "low") {
+            sorted.sort((a,b) => a.price - b.price);
+        }
+
+        if (this.value === "high") {
+            sorted.sort((a,b) => b.price - a.price);
+        }
+
+        displayProducts(sorted);
+    });
+
+    displayProducts(products);
+}
+</script>
+
+</body>
+</html>
